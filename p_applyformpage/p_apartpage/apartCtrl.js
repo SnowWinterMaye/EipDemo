@@ -4,4 +4,8 @@ hys.controller('apartCtrl', function ($scope, $state) {
     $scope.return = function () {
         $state.go('/applyform');
     }
+    $scope.goform = function () {
+        $state.go('/mainform');
+    }
+    
 });
