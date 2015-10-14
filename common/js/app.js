@@ -8,10 +8,10 @@ hys
                 url: '/homepage',
                 templateUrl: 'p_homepage/homepage.html',
                 controller: 'homepageCtrl'
-            }).state('/applyform', {
-                url: '/applyform',
-                templateUrl: '/p_applyformpage/applyform.html',
-                controller: 'applyformCtrl'
+            }).state('/application', {
+                url: '/application',
+                templateUrl: '/p_applyformpage/application.html',
+                controller: 'applicationCtrl'
             })
             .state('/apart', {
                 url: '/apart',

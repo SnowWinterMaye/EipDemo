@@ -1,4 +1,4 @@
-hys.controller('applyformCtrl', function ($scope, $state) {
+hys.controller('applicationCtrl', function ($scope, $state) {
 
         $scope.greet = "申请填报";
         //返回主界面
