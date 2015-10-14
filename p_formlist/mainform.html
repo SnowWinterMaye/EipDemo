@@ -1,8 +1,83 @@
-<h1>{{greet}}</h1>
+<style>
+    .button-full>button.button,
+    button.button-block,
+    button.button-full,
+    input.button.button-block {
+        width: 49%;
+    }
+    
+    .list:last-child.card {
+        margin-bottom: 0px;
+    }
+    
+    .card {
+        margin: 0px -30px 0px 0px;
+    }
+</style>
+<div class="bar bar-header  bar-positive">
+    <div class="button button-clear" ng-click="return()">
+        <i class="ion-chevron-left"></i>
+    </div>
+    <h1 class="title">{{greet}}</h1>
 
-<h2 ng-click="return()">返回</h2>
+</div>
+<ion-content class="content has-header">
 
-<h2 ng-click="goFee()">查看费用 或添加</h2>
-<h2 ng-click="goPath()">查看行程列表 或添加</h2>
+    <label class="item item-input">
+        <span class="input-label">申请人</span>
+        <input type="text">
+    </label>
+    <label class="item item-input">
+        <span class="input-label">部门</span>
+        <input type="text">
+    </label>
+    <label class="item item-input">
+        <span class="input-label">地区</span>
+        <input type="text">
+    </label>
 
-<script></script>
+    <label class="item item-input">
+        <div class="list" style="width: 80%;margin: 0;">
+            <label class="item item-input" style="border: none;padding-left: 0px;">
+                开始时间
+                <input type="date" class="datepicker">
+            </label>
+            <label class="item item-input" style="border: none;padding-left: 0px;border-top: 1px solid #ddd;">
+                结束时间
+                <input type="date" class="datepicker">
+            </label>
+        </div>
+        <!--<div style="position: relative;margin-left: 15px;" ng-click="goPath()">
+            <button class="button  button-calm">
+                行程明细
+            </button>
+        </div>-->
+    </label>
+    <lable>
+        <button class="button  button-calm" ng-click="goPath()" 
+                style="position: relative;float: right;margin-top: -73px;
+                        margin-right: 8px;z-index: 2;">
+            行程明细
+        </button>
+    </lable>
+
+    <label class="item item-input">
+        <span class="input-label">申请人</span>
+        <div style="position: relative;right: -35%;">
+            <button class="button  button-calm" ng-click="goFee()">
+                申请转报销
+            </button>
+        </div>
+
+    </label>
+
+</ion-content>
+
+<div class="bar bar-footer">
+    <button class="button button-block button-positive" ng-click="save()">
+        保存
+    </button>
+    <button class="button button-block button-positive" ng-click="submit()">
+        提交
+    </button>
+</div>

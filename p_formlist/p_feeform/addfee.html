@@ -1,5 +1,96 @@
-<h1>{{greet}}</h1>
+<meta charset="UTF-8">
+<style>
+    .content {
+        height: 1000px;
+    }
+    
+    .li-horizo ul li {
+        display: inline;
+    }
+    
+    .li-horizo div {
+        float: right;
+    }
+    
+    .item-checkbox {
+        padding-left: 80px;
+        border: none;
+    }
+    
+    .datepicker {
+        position: absolute;
+        left: 35%;
+        width: 50%;
+        height: 40px;
+        top: 7px;
+        border-radius: 5px;
+        border: #aaaaaa 1px solid;
+        font-weight: bold;
+    }
+</style>
 
-<h2 ng-click="return()">返回</h2>
+
+<div class="bar bar-header  bar-positive">
+    <div class="button button-clear" ng-click="return()">
+        <i class="ion-chevron-left"></i>
+    </div>
+    <h1 class="title">{{greet}}</h1>
+</div>
 
 
+<div class="content has-header">
+
+    <div class="list">
+        <label class="item item-input">
+            <span class="input-label">单据编号:</span>
+            <input type="text">
+        </label>
+        <label class="item item-input item-select">
+            <div class="input-label">
+                预算科目:
+            </div>
+            <select>
+                <option>预算科目A</option>
+                <option selected>预算科目B</option>
+                <option>预算科目C</option>
+            </select>
+        </label>
+        <label class="item item-input item-select">
+            <div class="input-label">
+                费用类型:
+            </div>
+            <select>
+                <option>费用类型A</option>
+                <option selected>费用类型B</option>
+                <option>费用类型C</option>
+            </select>
+        </label>
+
+        <label class="item item-input">
+            <span class="input-label">用途</span>
+            <input type="text">
+        </label>
+        <div class="item">
+            日期
+            <input type="date" class="datepicker">
+        </div>
+        <label class="item item-input">
+            <span class="input-label">申请金额</span>
+            <input type="text">
+        </label>
+        <label class="item item-input">
+            <span class="input-label">批准金额</span>
+            <input type="text">
+        </label>
+
+
+    </div>
+
+
+
+</div>
+<div class="bar bar-footer">
+    <button class="button button-block button-positive" ng-click="save()">
+        保存
+    </button>
+</div>
