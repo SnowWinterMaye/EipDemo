@@ -13,14 +13,14 @@ hys
                 templateUrl: '/p_applyformpage/application.html',
                 controller: 'applicationCtrl'
             })
-            .state('/apart', {
-                url: '/apart',
-                templateUrl: 'p_applyformpage/p_apartpage/apart.html',
-                controller: 'apartCtrl'
-            }).state('/project', {
-                url: '/project',
-                templateUrl: 'p_applyformpage/p_projectpage/project.html',
-                controller: 'projectCtrl'
+            .state('/choosedept', {
+                url: '/choosedept',
+                templateUrl: 'p_applyformpage/p_choosedept/choosedept.html',
+                controller: 'choosedeptCtrl'
+            }).state('/choosepro', {
+                url: '/choosepro',
+                templateUrl: 'p_applyformpage/p_choosepro/choosepro.html',
+                controller: 'chooseproCtrl'
             }).state('/feeform', {
                 url: '/feeform',
                 templateUrl: 'p_formlist/feeform.html',

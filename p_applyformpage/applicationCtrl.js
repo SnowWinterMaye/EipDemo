@@ -9,17 +9,17 @@ hys.controller('applicationCtrl', function ($scope, $state) {
     
         //跳项目出差申请
         $scope.goProject = function () {
-            $state.go('/project');
-            lastroute = '/project'
+            $state.go('/choosepro');
+            lastroute = '/choosepro'
         }
         //跳项目出差申请
         $scope.goSale = function () {
-            $state.go('/project');
-            lastroute = '/project'
+            $state.go('/choosepro');
+            lastroute = '/choosepro'
         }
         //跳部门出差申请
-        $scope.goApart = function () {
-            $state.go('/apart');
-            lastroute = '/apart'
+        $scope.goDept = function () {
+            $state.go('/choosedept');
+            lastroute = '/choosedept'
         }
     });
