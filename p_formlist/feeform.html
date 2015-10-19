@@ -15,8 +15,8 @@
 
 
 <div class="bar bar-header  bar-positive">
-    <div class="button button-clear" ng-click="return()">
-        <i class="ion-chevron-left"></i>
+    <div class="button button-clear" ng-click="goback()">
+        <img class="back-img" src="common/img/back.png">
     </div>
     <h1 class="title">{{greet}}</h1>
 </div>
@@ -26,32 +26,45 @@
 
 
     <div class="list">
-        <label class="item item-input">
-            <span class="input-label">主题</span>
-            <input type="text">
-        </label>
-        <label class="item item-input item-select">
-            <div class="input-label">
-                类别
+
+        <label class="item dpinput">
+            <div>
+                <span class="input-label">主题</span>
             </div>
-            <select>
-                <option>类别A</option>
-                <option selected>类别AB</option>
-                <option>类别V</option>
-            </select>
-        </label>
-        <label class="item item-input">
-            <span class="input-label">单据编号</span>
-            <input type="number" disabled="true" value="9999">
+            <div>
+                <input type="text" placeholder="请输入用途" id="feesubject" class="form-control" required="" name="feesubject" ng-pattern="/^[A-Za-z]{1}[0-9A-Za-z_]{2,29}$/"
+                ng-model="vm.fee.feesubject">
+            </div>
         </label>
 
-        <label class="item item-input">
-            <span class="input-label">申请金额99999</span>
-            <div style="position: relative;right: -35%;">
-                <button class="button  button-calm" ng-click="goFee()">
-                    费用明细列表
-                </button>
+
+        <div class="item dpinput">
+            <div><span class="input-label">类别</span></div>
+            <div>
+                <select class="form-control " ng-model="vm.value " ng-options="city.label for city in vm.classes ">
+                    <option value=" ">-- 请选择类别 --</option>
+                </select>
             </div>
+        </div>
+
+
+        <!--<div>您输入的是：{{vm.value}}</div>-->
+
+        <label class="item dpinput">
+            <div>
+                <span class="input-label">单据编号</span>
+            </div>
+            <div>
+                <span class="input-label">{{vm.cardnum}}</span>
+                <!--<input type="number" ng-model="vm.cardnum">-->
+            </div>
+        </label>
+
+
+        <label class="item item-input " style="background:white url( 'img/right33.png') no-repeat 98% 8px;background-size:
+                40px 20px; " ng-click="goFee() ">
+            <div class="col col-25 color-k ">申请金额</div>
+            <div class="col col-75 color-v " style="padding-left: 15px" ng-model="vm.summoney">{{vm.summoney}}</div>
         </label>
 
 
@@ -64,11 +77,11 @@
 
 
 </div>
-<div class="bar bar-footer">
-    <button class="button button-block button-positive" ng-click="save()">
+<div class="bar bar-footer ">
+    <button class="button button-block button-positive " ng-click="save() ">
         保存
     </button>
-    <button class="button button-block button-positive" ng-click="submit()">
+    <button class="button button-block button-positive " ng-click="submit() ">
         提交
     </button>
 </div>

@@ -1,4 +1,4 @@
-hys.controller('addpathCtrl', function ($scope, $state) {
+angular.module('dpeip').controller('addpathCtrl', function ($rootScope, $scope, $state) {
     $scope.greet = "添加行程";
     var vm = $scope.vm = {
         show_error: false,
@@ -13,22 +13,42 @@ hys.controller('addpathCtrl', function ($scope, $state) {
         }
     }
 
-        $scope.return = function () {
-            $state.go('/mainlist');
+    $scope.goback = function () {
+        $state.go('/mainlist');
+    }
+
+    //选择框数据
+    vm.StayList = [
+        { text: "酒店", value: "jiudian" },
+        { text: "宿舍", value: "sushe" },
+        { text: "自住", value: "zizhu" }
+    ];
+
+    // 默认选项
+   vm.stayway = {
+        text: "酒店", 
+        value: "jiudian"
+    };
+    //vm.stayway = vm.StayList[0];
+
+    vm.TranList = [
+        {
+            code: 'train',
+            label: '火车'
+        },
+        {
+            code: 'car',
+            label: '汽车'
+        },
+        {
+            code: 'air',
+            label: '飞机'
         }
-
-        //选择框数据
-        $scope.StayList = [
-            { text: "酒店", value: "jiudian" },
-            { text: "宿舍", value: "sushe" },
-            { text: "自住", value: "zizhu" }
-        ];
-
-
-
-
-
-
+    ];
+    //默认值
+    vm.tranway = vm.TranList[0];
+    
+    //时间限制
     var mindate = new Date(2015, 10, 9, 9, 22),
         maxdate = new Date(2015, 11, 11, 9, 22);
     var opt = {};
@@ -39,7 +59,7 @@ hys.controller('addpathCtrl', function ($scope, $state) {
         onSelect: function (text, ins) {
             $scope.selettime = text;
             $scope.$apply();//刷新数据	
-            //alert($scope.selettime);
+            //alert($scope.selettime+"Ins:"+ins);
         }
 
     };
@@ -58,33 +78,59 @@ hys.controller('addpathCtrl', function ($scope, $state) {
     $("#starttime").val = mindate;
     $("#endtime").val = maxdate;
     //默认值
-    $scope.selettime = new Date();
+    //$scope.selettime = new Date();
     $scope.$watch('selettime', function (value) {
         console.log(value);
     })
-    var listDetail = [];
-    var getObj = function (id) {
-        return id ? document.getElementById(id).innerText : id + "未找到";
-    }
-    $scope.Stayway = {
-        data: 'jiudian'
-    };
+
+
+    vm.dateFlag = true;
+    $scope.$watch('vm.endtime', function (value) {
+        if (vm.starttime && vm.starttime > vm.endtime) {
+            alert("错误");
+            vm.dateFlag = false;
+        } else {
+            vm.dateFlag = true;
+        }
+        //console.log('vm.endtime'+value);
+        
+    });
+    $scope.$watch('vm.starttime', function (value) {
+        if (vm.endtime && vm.starttime > vm.endtime) {
+            alert("错误");
+            vm.dateFlag = false;
+        } else {
+            vm.dateFlag = true;
+        }
+        //console.log('vm.starttime'+value);
+        
+    });
+    
+    
+    //保存
     vm.save = function (basic_form) {
         vm.show_error = true;
         basic_form.$setDirty();
         if (basic_form.$valid) {
-            alert("提交成功！");
+            alert("保存");
+            var cachedata = {
+                "starttime": vm.starttime,
+                "endtime": vm.endtime,
+                "startpath": vm.path.startpath,
+                "endpath": vm.path.endpath,
+                "tranway": vm.tranway,
+                "stayway": vm.stayway
+            };
+            console.log(cachedata);
+            if ($rootScope.paths === undefined) {
+                $rootScope.paths = [];
+                $rootScope.paths.push(cachedata);
+            } else {
+                $rootScope.paths.push(cachedata);
+            }
+            $state.go('/mainlist');
+
         }
-        var cachedata = {
-            "starttime": $("#starttime").val(),
-            "endtime": $("#endtime").val(),
-            "startpath": $("#startpath").val(),
-            "endpath": $("#endpath").val(),
-            "tranway": $("#tranway").val(),
-            "stayway": $scope.Stayway.data
-        };
-        console.log(cachedata);
-        listDetail.push(cachedata);
-        alert("保存");
+
     }
 });

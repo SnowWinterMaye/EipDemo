@@ -10,7 +10,7 @@
     
     .li-horizo div {
         float: right;
-        width: 80%;
+        width: 70%;
     }
     /*原边框隐藏*/
     
@@ -27,7 +27,8 @@
     /*x被选取时样式*/
     
     .item-radio input:checked~.item-content {
-        background: #ffffff;
+        color: #387ef5;
+        background: white;
     }
     /*每一个选项的宽度*/
     
@@ -40,10 +41,11 @@
     .item-content.disable-pointer-events {
         padding-left: 30px;
         padding-top: 5px;
+        height: 30px;
     }
     
     .item-radio input {
-        left: 25px;
+        left: 0px;
         z-index: 3;
     }
     
@@ -57,54 +59,91 @@
         border: #aaaaaa 1px solid;
         font-weight: bold;
     }
+    
+    input[readonly]:not(.cloned-text-input) {
+        margin-left: 10px;
+        min-width: 190px;
+    }
+    
+   input#starttime,input#endtime{
+        padding-bottom: 0px;
+        width: 60%;
+        margin-left: -5px;
+        background-color: white;
+    }
+    .item-content.disable-pointer-events span{
+        margin-left: 27px;
+    }
 </style>
 
 
 <div class="bar bar-header  bar-positive">
-    <div class="button button-clear" ng-click="return()">
-        <i class="ion-chevron-left"></i>
+    <div class="button button-clear" ng-click="goback()">
+        <img class="back-img" src="common/img/back.png">
     </div>
     <h1 class="title">{{greet}}</h1>
 </div>
 
 
 <form class="content has-header showcase-form" id="basic_form" name="basic_form" novalidate="">
-
-    <div class="item">
-        出发时间
-        <input type="text" name="appDate" id="starttime" class="datepicker" placeholder="请选择" />
-    </div>
-    <div class="item">
-        到达时间
-        <input type="text" name="appDate" id="endtime" class="datepicker" placeholder="请选择" />
-    </div>
     <div class="list">
-        <label class="item item-input">
-            <span class="input-label">起点:</span>
-            <input type="text" placeholder="请输入起点" id="startpath"  class="form-control" required="" name="startpath" ng-pattern="/^[A-Za-z]{1}[0-9A-Za-z_]{2,29}$/" ng-model="vm.path.startpath">
+        <label class="item dpinput">
+            <div><span class="input-label">出发时间</span></div>
+            <div>
+            <input type="text" name="starttime" id="starttime" required="" class="datepicker" placeholder="请选择" ng-model="vm.starttime"/>
+            </div>
         </label>
-        <label class="item item-input">
-            <span class="input-label">终点:</span>
-            <input type="text" placeholder="请输入终点" id="endpath" class="form-control" required="" name="endpath" ng-pattern="/^[A-Za-z]{1}[0-9A-Za-z_]{2,29}$/" ng-model="vm.path.endpath">
+        
+        <label class="item dpinput">
+            <div><span class="input-label">到达时间</span></div>
+            <div>
+            <input type="text" name="endtime" id="endtime" required="" class="datepicker" placeholder="请选择" ng-model="vm.endtime"/>
+            </div>
         </label>
-        <label class="item item-input">
-            <span class="input-label">交通方式</span>
-            <input type="text" placeholder="请输入交通方式" id="tranway" class="form-control" required="" name="tranway" ng-pattern="/^[A-Za-z]{1}[0-9A-Za-z_]{2,29}$/" ng-model="vm.path.tranway">
+        
+        
+       <label class="item dpinput">
+            <div>
+                <span class="input-label">起点</span>
+            </div>
+            <div>
+              <input type="text" placeholder="请输入起点" id="startpath" class="form-control" required="" name="startpath"
+            ng-model="vm.path.startpath">
+            </div>
         </label>
+
+        
+        <label class="item dpinput">
+            <div>
+                <span class="input-label">终点</span>
+            </div>
+            <div>
+            <input type="text" placeholder="请输入终点" id="endpath" class="form-control" required="" name="endpath"
+            ng-model="vm.path.endpath">
+            </div>
+        </label>
+        
+        <div class="item dpinput">
+            <div><span class="input-label">交通方式</span></div>
+            <div>
+                <select class="form-control " ng-model="vm.tranway " ng-options="city.label for city in vm.TranList ">
+                    <option value=" ">-- 请选择交通方式 --</option>
+                </select>
+            </div>
+        </div>
 
         <div class="li-horizo item" id="stayway">
             <span style="winth:20%">住宿方式</span>
             <div>
-                <ion-radio ng-repeat="item in StayList" ng-value="item.value" ng-model="Stayway.data" class="checkbox">
+                <ion-radio ng-repeat="item in vm.StayList" ng-value="item.value" ng-model="vm.stayway.value" class="checkbox">
                     {{ item.text }}
                 </ion-radio>
-
             </div>
-
         </div>
+        
 
         <div class="item item-divider">
-            Clientside, Selected Value: {{ Stayway.data }}
+            Clientside, Selected Value: {{ vm.stayway.value }}
         </div>
 
 
@@ -115,6 +154,10 @@
         <div class="col-sm-10">
             <div class="alert alert-danger" style="margin-bottom: 0px">
                 <ul>
+                    <li ng-show="(basic_form.starttime.$dirty || vm.show_type == 3) && basic_form.starttime.$error.required">请选择开始时间！</li>
+                    <li ng-show="(basic_form.endtime.$dirty || vm.show_type == 3) && basic_form.endtime.$error.required">请选择结束时间！</li>
+                    <li ng-show="(!vm.dateFlag)">起始时间应早于结束时间！</li>
+                    
                     <li ng-show="(basic_form.startpath.$dirty || vm.show_type == 3) && basic_form.startpath.$error.required">起点不能为空！</li>
                     <li ng-show="(basic_form.endpath.$dirty || vm.show_type == 3) && basic_form.endpath.$error.required">终点不能为空！</li>
                     <li ng-show="(basic_form.tranway.$dirty || vm.show_type == 3) && basic_form.tranway.$error.required">交通方式不能为空！</li>
@@ -122,10 +165,11 @@
                 </ul>
             </div>
         </div>
+    </div>
 </form>
 
 
-</div>
+
 <div class="bar bar-footer">
     <button class="button button-block button-positive" ng-click="vm.save(basic_form)">
         保存

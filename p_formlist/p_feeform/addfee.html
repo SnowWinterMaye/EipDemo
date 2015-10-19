@@ -27,70 +27,112 @@
         border: #aaaaaa 1px solid;
         font-weight: bold;
     }
+    
+    input#daytime {
+        padding-bottom: 0px;
+        width: 60%;
+        margin-left: -5px;
+        background-color: white;
+    }
+    
+
 </style>
 
 
 <div class="bar bar-header  bar-positive">
-    <div class="button button-clear" ng-click="return()">
-        <i class="ion-chevron-left"></i>
+    <div class="button button-clear" ng-click="goback()">
+        <img class="back-img" src="common/img/back.png">
     </div>
     <h1 class="title">{{greet}}</h1>
 </div>
 
 
-<div class="content has-header">
-
+<form class="content has-header showcase-form" id="fee_form" name="fee_form" novalidate="">
     <div class="list">
-        <label class="item item-input">
-            <span class="input-label">单据编号:</span>
-            <input type="text">
-        </label>
-        <label class="item item-input item-select">
-            <div class="input-label">
-                预算科目:
+        <label class="item dpinput">
+            <div><span class="input-label">单据编号</span></div>
+            <div>
+                <input type="number" placeholder="请输入单据编号" id="feenum" class="form-control" required="" name="feenum" ng-pattern="/^[0-9]{0,9}$/"
+                ng-model="vm.fee.num">
             </div>
-            <select>
-                <option>预算科目A</option>
-                <option selected>预算科目B</option>
-                <option>预算科目C</option>
-            </select>
-        </label>
-        <label class="item item-input item-select">
-            <div class="input-label">
-                费用类型:
-            </div>
-            <select>
-                <option>费用类型A</option>
-                <option selected>费用类型B</option>
-                <option>费用类型C</option>
-            </select>
         </label>
 
-        <label class="item item-input">
-            <span class="input-label">用途</span>
-            <input type="text">
-        </label>
-        <div class="item">
-            日期
-            <input type="text" name="appDate" id="starttime" class="datepicker" placeholder="请选择"/>
+        <div class="item dpinput">
+            <div><span class="input-label">预算科目</span></div>
+            <div>
+                <select class="form-control " ng-model="vm.fee.subject" ng-options="subject.label for subject in vm.subjects">
+                    <option value=" ">-- 请选择预算科目 --</option>
+                </select>
+            </div>
         </div>
-        <label class="item item-input">
-            <span class="input-label">申请金额</span>
-            <input type="text">
+
+        <div class="item dpinput">
+            <div>
+                <span class="input-label">费用类型</span>
+            </div>
+            <div>
+                <select class="form-control " ng-model="vm.fee.feestyle" ng-options="feestyle.label for feestyle in vm.fee.subject.style">
+                    <option value=" ">-- 请选择费用类型 --</option>
+                </select>
+            </div>
+        </div>
+
+
+        <label class="item dpinput">
+            <div>
+                <span class="input-label">用途</span>
+            </div>
+            <div>
+                <input type="text" placeholder="请输入用途" id="feeuse" class="form-control" required="" name="feeuse" maxlength="20"
+                ng-model="vm.fee.usefor">
+            </div>
         </label>
-        <label class="item item-input">
-            <span class="input-label">批准金额</span>
-            <input type="text">
+
+        <label class="item dpinput">
+            <div>
+                <span class="input-label">日期</span>
+            </div>
+            <div>
+                <input type="text" name="appDate" id="daytime"  ng-model="vm.fee.datetime" required=""  class="datepicker" placeholder="请选择" />
+            </div>
+
+        </label>
+
+
+        <label class="item dpinput">
+            <div>
+                <span class="input-label">申请金额</span>
+            </div>
+            <div>
+                <input type="number" placeholder="请输入" id="money" class="form-control" required="" maxlength="8"
+                name="money" ng-pattern="/^([1-9][0-9]*(\.[0-9]{0,2})?|0\.[1-9][0-9]{0,1}|0\.0[1-9])$/"
+                ng-model="vm.fee.money">
+            </div>
         </label>
 
 
     </div>
+    <div class="form-group" ng-show="fee_form.$invalid && (fee_form.$dirty || vm.show_type == 3) && vm.show_error">
+        <label class="col-sm-2 control-label"></label>
+
+        <div class="col-sm-10">
+            <div class="alert alert-danger" style="margin-bottom: 0px">
+                <ul>
+                	<li ng-show="(fee_form.appDate.$dirty || vm.show_type == 3) && fee_form.appDate.$error.required">日期不能为空！</li>
+                    <li ng-show="(fee_form.feenum.$dirty || vm.show_type == 3) && fee_form.feenum.$error.required">编号不能为空！</li>
+                    <li ng-show="(fee_form.feeuse.$dirty || vm.show_type == 3) && fee_form.feeuse.$error.required">用途不能为空！</li>
+                    <li ng-show="(fee_form.money.$dirty || vm.show_type == 3) && fee_form.money.$error.required">金额不能为空！</li>
+                    <li ng-show="(fee_form.money.$dirty || vm.show_type == 3) && fee_form.money.$error.pattern">只能输入数字！</li>
+
+                </ul>
+            </div>
+        </div>
+    </div>
 
 
-
-</div>
+</form>
 <div class="bar bar-footer">
-    <button class="button button-block button-positive" ng-click="save()">
+    <button class="button button-block button-positive" ng-click="vm.save(fee_form)">
         保存
     </button>
 </div>

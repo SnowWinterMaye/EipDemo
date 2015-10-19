@@ -1,4 +1,4 @@
-var hys = angular.module('hysapp', ['ngRequire','ionic']);
+var hys = angular.module('dpeip', ['ngRequire','ionic']);
 var lastroute = "";
 hys
     .config(['$stateProvider', '$urlRouterProvider', '$requireProvider',

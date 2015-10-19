@@ -8,6 +8,7 @@ body{
      background: white;
 }
 
+
 showcase-form textarea .ng-dirty.ng-invalid,
 .showcase-form select .ng-dirty.ng-invalid,
 .showcase-form input.ng-dirty.ng-invalid {
@@ -140,3 +141,34 @@ fieldset[disabled] .form-control {
   background-color: #eeeeee;
   opacity: 1;
 }
+
+    .dpinput {
+        height: 50px;
+        padding-top: 7px;
+
+    }
+    .dpinput input{
+        border: none;
+        border-bottom: 1px solid #cccccc;
+        border-radius: 0;
+        box-shadow: none;
+    }
+    .dpinput div:first-child {
+        float: left;
+    }
+    
+    .dpinput div:last-child {
+        width: 68%;
+        float: right;
+    }
+    
+    .dpinput div span {
+        width: 100%;
+    }
+
+    .back-img {
+    margin-top: 3px;
+    margin-left: 5px;
+    width: 25px;
+    height: 25px;
+    }
