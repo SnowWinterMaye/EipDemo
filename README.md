@@ -8,7 +8,13 @@
     * applyform
         * choosedept
         * chooseproject
-            
+            * mainform
+            * pathlist
+                * addpath
+            * feeform
+                * feelist
+                * addfee
+
 
     var s = "hello";
     
