@@ -1,7 +1,7 @@
 #EIP Test page;
 
 ##include 10 page for one function.
-##languauage preview
+##language preview
 
 * index
 * homepage
@@ -16,11 +16,14 @@
 ***
 
 ##关于作者
-    1. A
-    2. B 
-    
-* C
-    * D 
+```
+{
+    "name":"Maye"
+}
+```
+
+
+*He is  a fresh bird*
     
 
     
@@ -38,11 +41,3 @@
     console.log(s);
 ```
 
-```
-{
-    "name":"Maye"
-    }
-```
-
-
-*Heee*
