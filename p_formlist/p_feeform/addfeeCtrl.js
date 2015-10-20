@@ -3,6 +3,10 @@ angular.module('dpeip').controller('addfeeCtrl', function ($rootScope,$scope, $s
   $scope.greet = "添加费用清单";
   //返回上一级
   $scope.goback = function () {
+    if($rootScope.Editem){
+      $rootScope.fees.push($rootScope.Editem);
+      $rootScope.Editem = undefined;
+    }
     $state.go('/feelist');
   };
   
@@ -18,7 +22,18 @@ angular.module('dpeip').controller('addfeeCtrl', function ($rootScope,$scope, $s
       vm.show_error = false;
     }
   };
-    
+  
+  if($rootScope.Editem){
+          vm.fee.num = $rootScope.Editem["num"],
+          vm.fee.subject = $rootScope.Editem["subject"],
+          vm.fee.feestyle = $rootScope.Editem["style"],
+          vm.fee.usefor = $rootScope.Editem["userfor"],
+          vm.fee.datetime = $rootScope.Editem["datetime"],
+          vm.fee.money = $rootScope.Editem["money"]
+  }
+  
+vm.fee.num = $rootScope.fees?$rootScope.fees.length+1:1;
+  
   //模拟数据
   vm.subjects = [
     {
@@ -91,14 +106,18 @@ angular.module('dpeip').controller('addfeeCtrl', function ($rootScope,$scope, $s
         $rootScope.fees.push(cachedata);
       }
       alert("保存");
+      //清空编辑数据
+      
+      
+      $rootScope.Editem = undefined;
       $state.go('/feelist');
     }
 
   };
 
   //日期控件初始化
-  var mindate = new Date(2015, 10, 9, 9, 22),
-      maxdate = new Date(2015, 11, 11, 9, 22);
+  var mindate = new Date(2015, 1, 1, 1, 1),
+      maxdate = new Date(2017, 1, 1, 1, 1);
   var opt = {};
   opt.defaults = {
     theme: 'android-ics light', //皮肤样式

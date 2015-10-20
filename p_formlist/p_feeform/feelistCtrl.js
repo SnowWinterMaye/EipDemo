@@ -2,38 +2,52 @@ angular.module('dpeip').controller('feelistCtrl', function ($rootScope, $scope, 
     $scope.greet = "费用清单";
 
     $scope.goback = function () {
-        //若有数据 且已保存 则直接返回
-        if ($rootScope.feeSaveFlag !== false) {
-            $state.go('/feeform');
-        } else {//否则弹出未保存，并确认是否保存，弹出窗确定保存则保存，不确定则直接返回，并把数据清空，$rootScope.paths重置为 undefined
-            var confirmPopup = $ionicPopup.confirm({
-                title: '保存提示',
-                template: '您填写的内容还未保存，是否保存?',
-                okText: '保存',
-                cancelText: '取消',
-            });
-            confirmPopup.then(function (res) {
-                if (res) {
-                    console.log('保存');
-                    $scope.saveFee();
-                    $state.go('/feeform');
-                } else {
-                    console.log('取消');
-                    $rootScope.fees = undefined;
-                    $state.go('/feeform');
-                }
-            });
+        //默认已保存，直接返回
+        $state.go('/feeform');
+        
+        // //若有数据 且已保存 则直接返回
+        // if ($rootScope.feeSaveFlag !== false) {
+        //     $state.go('/feeform');
+        // } else {//否则弹出未保存，并确认是否保存，弹出窗确定保存则保存，不确定则直接返回，并把数据清空，$rootScope.paths重置为 undefined
+        //     var confirmPopup = $ionicPopup.confirm({
+        //         title: '保存提示',
+        //         template: '您填写的内容还未保存，是否保存?',
+        //         okText: '保存',
+        //         cancelText: '取消',
+        //     });
+        //     confirmPopup.then(function (res) {
+        //         if (res) {
+        //             console.log('保存');
+        //             $scope.saveFee();
+        //             $state.go('/feeform');
+        //         } else {
+        //             console.log('取消');
+        //             $rootScope.fees = undefined;
+        //             $state.go('/feeform');
+        //         }
+        //     });
 
-        }
+        // }
 
     }
     $scope.addFee = function () {
-        $rootScope.feeSaveFlag = false;
+        //$rootScope.feeSaveFlag = false;
         $state.go('/addfee');
     }
     $scope.saveFee = function () {
-        $rootScope.feeSaveFlag = true;
+        //$rootScope.feeSaveFlag = true;
         alert('保存');
+    }
+    
+    //修改 编辑
+    $scope.doEdit = function(item){
+        console.log(item);
+        $rootScope.Editem = item;
+        
+        var idx = $scope.items.indexOf(item);
+        $scope.items.splice(idx, 1);
+        
+        $state.go('/addfee');
     }
 
     if ($rootScope.fees && $rootScope.fees.length !== 0) {

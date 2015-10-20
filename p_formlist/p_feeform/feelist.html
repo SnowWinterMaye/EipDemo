@@ -14,16 +14,16 @@
 </style>
 <div class="bar bar-header  bar-positive">
     <div class="button button-clear" ng-click="goback()">
-        <img class="back-img" src="common/img/back.png">
+        <img class="back-img" src="img/back.png">
     </div>
     <h1 class="title">{{greet}}</h1>
     <a class="button button-clear icon ion-ios-minus-outline" ng-click="flag.showDelete=!flag.showDelete;flag.showReorder=false;"></a>
 </div>
-<ion-content class="has-header">
+<ion-content class="has-header has-footer">
     <ion-list show-delete="flag.showDelete">
         <ion-item ng-repeat="item in items">
 
-            <div class="list card">
+            <div class="list card" ng-click="doEdit(item)">
 
                 <div class="item item-avatar" style="padding:0;background:#00a3e3;">
                     <table style="width:100%;height:100%;color:white;">

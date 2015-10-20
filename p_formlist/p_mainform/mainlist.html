@@ -14,7 +14,7 @@
 </style>
 <div class="bar bar-header  bar-positive">
     <div class="button button-clear" ng-click="goback()">
-        <img class="back-img" src="common/img/back.png">
+        <img class="back-img" src="img/back.png">
     </div>
     <h1 class="title">{{greet}}</h1>
     <a class="button button-clear icon ion-ios-minus-outline" ng-click="flag.showDelete=!flag.showDelete;flag.showReorder=false;"></a>
@@ -23,7 +23,7 @@
     <ion-list show-delete="flag.showDelete">
         <ion-item ng-repeat="item in items">
 
-            <div class="list card">
+            <div class="list card" ng-click="doEdit(item)">
                 <div class="item item-avatar" style="padding:0;background:#00a3e3;">
                 <table style="widthL100%;height:100%;color:white;margin-top: 6px;">
                     <tr style="height:50%;font-size:26px;text-align:center;">

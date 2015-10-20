@@ -1,9 +1,6 @@
 <meta charset="UTF-8">
 
 <style>
-    .content {
-        height: 1000px;
-    }
     
     .button-full>button.button,
     button.button-block,
@@ -11,37 +8,39 @@
     input.button.button-block {
         width: 49%;
     }
+    .detail-part {
+        padding: 0px 0px;
+    }
+
 </style>
 
 
 <div class="bar bar-header  bar-positive">
     <div class="button button-clear" ng-click="goback()">
-        <img class="back-img" src="common/img/back.png">
+        <img class="back-img" src="img/back.png">
     </div>
     <h1 class="title">{{greet}}</h1>
 </div>
 
 
-<div class="content has-header">
-
-
-    <div class="list">
-
+<ion-content class="has-header has-footer" style="background:#ddd;">
         <label class="item dpinput">
             <div>
                 <span class="input-label">主题</span>
             </div>
             <div>
-                <input type="text" placeholder="请输入用途" id="feesubject" class="form-control" required="" name="feesubject" ng-pattern="/^[A-Za-z]{1}[0-9A-Za-z_]{2,29}$/"
-                ng-model="vm.fee.feesubject">
+                <span class="input-label">{{vm.feesubject}}</span>
+                <!--<input type="text" placeholder="请输入用途" id="feesubject" class="form-control" required="" name="feesubject" 
+                ng-pattern="/^[A-Za-z]{1}[0-9A-Za-z_]{2,29}$/"
+                ng-model="vm.feesubject">-->
             </div>
         </label>
+        
 
-
-        <div class="item dpinput">
+       <div class="item dpinput">
             <div><span class="input-label">类别</span></div>
             <div>
-                <select class="form-control " ng-model="vm.value " ng-options="city.label for city in vm.classes ">
+                <select class="form-control " ng-model="vm.stylevalue " ng-options="city.label for city in classes ">
                     <option value=" ">-- 请选择类别 --</option>
                 </select>
             </div>
@@ -50,38 +49,87 @@
 
         <!--<div>您输入的是：{{vm.value}}</div>-->
 
-        <label class="item dpinput">
-            <div>
-                <span class="input-label">单据编号</span>
+      <label class="item dpinput">
+            <div><span class="input-label">单据编号</span>
             </div>
-            <div>
-                <span class="input-label">{{vm.cardnum}}</span>
+            <div><span class="input-label">{{vm.cardnum}}</span>
                 <!--<input type="number" ng-model="vm.cardnum">-->
             </div>
         </label>
 
 
-        <label class="item item-input " style="background:white url( 'img/right33.png') no-repeat 98% 8px;background-size:
-                40px 20px; " ng-click="goFee() ">
-            <div class="col col-25 color-k ">申请金额</div>
-            <div class="col col-75 color-v " style="padding-left: 15px" ng-model="vm.summoney">{{vm.summoney}}</div>
+        <label class="item dpinput" style="background:white url( 'img/right33.png') no-repeat 98% 8px;background-size:
+                40px 20px; "
+        ng-click="goFee() ">
+            <div><span class="input-label">申请金额</span></div>
+            <div><span class="input-label">{{vm.summoney}}</span>
+            </div>
         </label>
+        
+         <label class="item dpinput">
+            <div><span class="input-label">报销人</span></div>
+            <div><span class="input-label">{{vm.BXperson}}</span>
+            </div>
+         </label>
+         <label class="item dpinput">
+            <div><span class="input-label">报销人部门</span></div>
+            <div><span class="input-label">{{vm.BXdepart}}</span>
+            </div>
+         </label>
+         <label class="item dpinput">
+            <div><span class="input-label">费用归属项目</span></div>
+            <div><span class="input-label">{{vm.BXproject}}</span>
+            </div>
+         </label>
+         <label class="item dpinput">
+            <div><span class="input-label">费用归属部门</span></div>
+            <div><span class="input-label">{{vm.BXfeedepart}}</span>
+            </div>
+         </label>
+         <label class="item dpinput">
+            <div><span class="input-label">费用负责人</span></div>
+            <div><span class="input-label">{{vm.feeResman}}</span>
+            </div>
+         </label>
+            
+       <div class="detail-part">
+             <label class="item dpinput">
+            <div><span class="input-label">特殊说明</span></div>
+            <div><input type="text" id="specialtext" class="form-control" name="specialtext" ng-model="vm.specialtext">
+            </div></label>
+            
+            <label class="item dpinput">
+            <div><span class="input-label">变更说明</span></div>
+            <div><input type="text" id="changetext" class="form-control" name="changetext" ng-model="vm.changetext">
+            </div></label>
+            
+       </div>          
+              
+      <div class="detail-part">
+          <lable class="item dpinput">
+              <span class="title">收款人信息:</span></lable>
+         <label class="item dpinput">
+            <div><span class="input-label">账户名</span></div>
+            <div><input type="text" id="plan" class="form-control" name="plan" ng-model="vm.accname">
+            </div></label>   
+         <label class="item dpinput">
+            <div><span class="input-label">开户行</span></div>
+            <div><input type="text" id="plan" class="form-control" name="plan" ng-model="vm.bankname">
+            </div></label> 
+         <label class="item dpinput">
+            <div><span class="input-label">账号</span></div>
+            <div><input type="text" id="plan" class="form-control" name="plan" ng-model="vm.cardid">
+            </div></label>   
+      </div>
+                
+    </ion-content>
 
 
-    </div>
-
-</div>
-</div>
-
-
-
-
-</div>
-<div class="bar bar-footer ">
+<ion-footer class="bar bar-footer">
     <button class="button button-block button-positive " ng-click="save() ">
         保存
     </button>
     <button class="button button-block button-positive " ng-click="submit() ">
         提交
     </button>
-</div>
+</ion-footer>

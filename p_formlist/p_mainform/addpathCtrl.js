@@ -14,8 +14,22 @@ angular.module('dpeip').controller('addpathCtrl', function ($rootScope, $scope, 
     }
 
     $scope.goback = function () {
+        if ($rootScope.Editem) {
+            $rootScope.paths.push($rootScope.Editem);
+            $rootScope.Editem = undefined;
+        }
         $state.go('/mainlist');
     }
+
+    if ($rootScope.Editem) {
+        vm.starttime = $rootScope.Editem["starttime"],
+        vm.endtime = $rootScope.Editem["endtime"],
+        vm.path.startpath = $rootScope.Editem["startpath"],
+        vm.path.endpath = $rootScope.Editem["endpath"],
+        vm.tranway = $rootScope.Editem["tranway"],
+        vm.stayway = $rootScope.Editem["stayway"]
+    }
+
 
     //选择框数据
     vm.StayList = [
@@ -25,8 +39,8 @@ angular.module('dpeip').controller('addpathCtrl', function ($rootScope, $scope, 
     ];
 
     // 默认选项
-   vm.stayway = {
-        text: "酒店", 
+    vm.stayway = {
+        text: "酒店",
         value: "jiudian"
     };
     //vm.stayway = vm.StayList[0];
@@ -128,6 +142,7 @@ angular.module('dpeip').controller('addpathCtrl', function ($rootScope, $scope, 
             } else {
                 $rootScope.paths.push(cachedata);
             }
+            $rootScope.Editem = undefined;
             $state.go('/mainlist');
 
         }
